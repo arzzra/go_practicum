@@ -59,36 +59,36 @@ jobs:
 #   * gauge, тип float64
 #   * counter, тип int64
 # В качестве источника метрик использовать пакет runtime. Собирать следующие метрики:
-#   * Имя метрики: "Alloc", тип: gauge
-#   * Имя метрики: "BuckHashSys", тип: gauge
-#   * Имя метрики: "Frees", тип: gauge
-#   * Имя метрики: "GCCPUFraction", тип: gauge
-#   * Имя метрики: "GCSys", тип: gauge
-#   * Имя метрики: "HeapAlloc", тип: gauge
-#   * Имя метрики: "HeapIdle", тип: gauge
-#   * Имя метрики: "HeapInuse", тип: gauge
-#   * Имя метрики: "HeapObjects", тип: gauge
-#   * Имя метрики: "HeapReleased", тип: gauge
-#   * Имя метрики: "HeapSys", тип: gauge
-#   * Имя метрики: "LastGC", тип: gauge
-#   * Имя метрики: "Lookups", тип: gauge
-#   * Имя метрики: "MCacheInuse", тип: gauge
-#   * Имя метрики: "MCacheSys", тип: gauge
-#   * Имя метрики: "MSpanInuse", тип: gauge
-#   * Имя метрики: "MSpanSys", тип: gauge
-#   * Имя метрики: "Mallocs", тип: gauge
-#   * Имя метрики: "NextGC", тип: gauge
-#   * Имя метрики: "NumForcedGC", тип: gauge
-#   * Имя метрики: "NumGC", тип: gauge
-#   * Имя метрики: "OtherSys", тип: gauge
-#   * Имя метрики: "PauseTotalNs", тип: gauge
-#   * Имя метрики: "StackInuse", тип: gauge
-#   * Имя метрики: "StackSys", тип: gauge
-#   * Имя метрики: "Sys", тип: gauge
-#   * Имя метрики: "TotalAlloc", тип: gauge
+#   *  "Alloc", 
+#   *  "BuckHashSys", 
+#   *  "Frees", 
+#   *  "GCCPUFraction", 
+#   *  "GCSys", 
+#   *  "HeapAlloc", 
+#   *  "HeapIdle", 
+#   *  "HeapInuse", 
+#   *  "HeapObjects", 
+#   *  "HeapReleased", 
+#   *  "HeapSys", 
+#   *  "LastGC", 
+#   *  "Lookups", 
+#   *  "MCacheInuse", 
+#   *  "MCacheSys", 
+#   *  "MSpanInuse", 
+#   *  "MSpanSys", 
+#   *  "Mallocs", 
+#   *  "NextGC", 
+#   *  "NumForcedGC", 
+#   *  "NumGC", 
+#   *  "OtherSys", 
+#   *  "PauseTotalNs", 
+#   *  "StackInuse", 
+#   *  "StackSys", 
+#   *  "Sys", 
+#   *  "TotalAlloc", 
 # К метрикам пакета runtime, добавить метрики:
-#   * Имя метрики: "PollCount", тип: counter - счетчик, увеличивающийся на 1, при каждом обновлении метрики из пакета runtime (на каждый pollInterval - см. ниже)
-#   * Имя метрики: "RandomValue", тип: gauge - обновляемое рандомное значение
+#   *  "PollCount", тип: counter - счетчик, увеличивающийся на 1, при каждом обновлении метрики из пакета runtime (на каждый pollInterval - см. ниже)
+#   *  "RandomValue",  - обновляемое рандомное значение
 # По умолчанию, приложение должно обновлять метрики из пакета runtime с заданной частотой:
 #   pollInterval - 2 секунды
 # По умолчанию, приложение должно отправлять метрики на сервер с заданной частотой:
@@ -391,9 +391,9 @@ jobs:
 # что бы сбор метрик (опрос runtime) и их отправка осуществлялись в разных горутинах.
 # Добавьте еще одну горутину которая бы собирала дополнительные метрики
 # (с использованием пакета https://github.com/shirou/gopsutil)
-#   * Имя метрики: "TotalMemory", тип: gauge - общее количество памяти
-#   * Имя метрики: "FreeMemory", тип: gauge - общее количество свободной памяти
-#   * Имя метрики: "CPUutilization1", тип: gauge - загрузка ядра в процентах за 10 секунд (точное количество - по числу CPU определяемое во время исполнения)
+#   *  "TotalMemory",  - общее количество памяти
+#   *  "FreeMemory",  - общее количество свободной памяти
+#   *  "CPUutilization1",  - загрузка ядра в процентах за 10 секунд (точное количество - по числу CPU определяемое во время исполнения)
 
       - name: "Code increment #14"
         if: always()
