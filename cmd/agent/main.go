@@ -1,8 +1,8 @@
 package main
 
 import (
-	"agent/internal/agent"
 	"context"
+	"github.com/arzzra/go_practicum/internal/agent"
 	"os/signal"
 	"syscall"
 	"time"
