@@ -29,7 +29,7 @@ func (h *Handler) postMetric(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, err.Error(), http.StatusBadRequest)
 		return
 	}
-	h.Server.Storage.SaveMetric(m)
+	h.Server.Storage.UpdateMetric(m)
 	w.WriteHeader(http.StatusOK)
 }
 
