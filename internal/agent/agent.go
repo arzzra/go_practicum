@@ -83,11 +83,9 @@ func (A *Agent) sendMetrics(ctx context.Context) {
 
 func (A *Agent) sendRequest(ctx context.Context, statType string, nameStat string, value interface{}) {
 	var url string
-	//x := reflect.TypeOf(value).Kind()
 	url = fmt.Sprintf("http://%s:%s/update/%s/%s/%v",
 		A.Settings.Host, A.Settings.Port,
 		statType, nameStat, reflect.ValueOf(value))
-	fmt.Println(url)
 	A.SyncWG.Add(1)
 	go func() {
 		defer A.SyncWG.Done()
