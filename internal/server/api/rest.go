@@ -39,11 +39,6 @@ func (h *Handler) getMetric(w http.ResponseWriter, r *http.Request) {
 	m, err := h.Server.Storage.GetMetricFromStorage(typeM, name)
 
 	if err != nil {
-		http.Error(w, err.Error(), http.StatusInternalServerError)
-		return
-	}
-
-	if m == nil {
 		http.Error(w, fmt.Sprintf("Metric %s not found", name), http.StatusNotFound)
 		return
 	}

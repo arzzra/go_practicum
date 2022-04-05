@@ -46,7 +46,7 @@ func (s *MetricStorage) GetMetricFromStorage(typeM metric.MetricType, name strin
 	s.mutex.RLock()
 	defer s.mutex.RUnlock()
 
-	if m, ok := s.metrics[name]; ok && m.Type == typeM {
+	if m := s.metrics[name]; m.Type == typeM {
 		return &m, nil
 	}
 
