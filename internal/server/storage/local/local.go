@@ -22,6 +22,7 @@ func MakeMetricStorage() *MetricStorage {
 func (s *MetricStorage) SaveMetric(m metric.Metric) {
 	s.mutex.Lock()
 	defer s.mutex.Unlock()
+
 	s.metrics[m.Name] = m
 }
 

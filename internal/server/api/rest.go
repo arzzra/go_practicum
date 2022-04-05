@@ -20,18 +20,17 @@ const templateHTML = `
 	</body>
 	</html>`
 
-func (h *Handler) postMetric(wrt http.ResponseWriter, req *http.Request) {
-	typeM := metric.MetricType(chi.URLParam(req, "Type"))
-	name := chi.URLParam(req, "Name")
-	value := chi.URLParam(req, "Value")
-
+func (h *Handler) postMetric(w http.ResponseWriter, r *http.Request) {
+	typeM := metric.MetricType(chi.URLParam(r, "Type"))
+	name := chi.URLParam(r, "Name")
+	value := chi.URLParam(r, "Value")
 	m, err := metric.MakeMetricStruct(name, typeM, value)
 	if err != nil {
-		http.Error(wrt, err.Error(), http.StatusBadRequest)
+		http.Error(w, err.Error(), http.StatusBadRequest)
 		return
 	}
 	h.Server.Storage.SaveMetric(m)
-	wrt.WriteHeader(http.StatusOK)
+	w.WriteHeader(http.StatusOK)
 }
 
 func (h *Handler) getMetric(w http.ResponseWriter, r *http.Request) {
@@ -40,7 +39,7 @@ func (h *Handler) getMetric(w http.ResponseWriter, r *http.Request) {
 	m, err := h.Server.Storage.GetMetricFromStorage(typeM, name)
 
 	if err != nil {
-		http.Error(w, err.Error(), http.StatusNotFound)
+		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
 

@@ -24,7 +24,7 @@ type Metric struct {
 }
 
 func (m MetricType) Validate() error {
-	if m == TypeCounter || m == TypeCounter {
+	if m == TypeGauge || m == TypeCounter {
 		return nil
 	} else {
 		return fmt.Errorf("unknown type of metric: %s", m)
