@@ -45,7 +45,7 @@ func MakeMetricStruct(name string, typeM MetricType, value string) (Metric, erro
 			ValueCounter: 0,
 		}, nil
 	case TypeCounter:
-		intValue, err := strconv.Atoi(value)
+		intValue, err := strconv.ParseInt(value, 10, 64)
 		if err != nil {
 			return Metric{}, err
 		}
