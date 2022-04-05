@@ -43,7 +43,7 @@ func withMetricTypeValidator(next http.Handler) http.Handler {
 	f := func(w http.ResponseWriter, r *http.Request) {
 		metricType := chi.URLParam(r, "Type")
 		if err := metric.MetricType(metricType).Validate(); err != nil {
-			http.Error(w, err.Error(), http.StatusNotImplemented)
+			http.Error(w, err.Error(), http.StatusBadRequest)
 			return
 		}
 		next.ServeHTTP(w, r)

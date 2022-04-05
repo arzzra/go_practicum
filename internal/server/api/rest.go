@@ -40,7 +40,7 @@ func (h *Handler) getMetric(w http.ResponseWriter, r *http.Request) {
 	m, err := h.Server.Storage.GetMetricFromStorage(typeM, name)
 
 	if err != nil {
-		http.Error(w, err.Error(), http.StatusInternalServerError)
+		http.Error(w, err.Error(), http.StatusNotFound)
 		return
 	}
 
