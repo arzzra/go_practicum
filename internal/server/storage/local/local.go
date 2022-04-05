@@ -34,7 +34,7 @@ func (s *MetricStorage) UpdateMetric(m metric.Metric) error {
 		if dataM.Type != m.Type {
 			return fmt.Errorf("different types: %s and %s", dataM.Type, m.Type)
 		}
-		m.ValueGauge += dataM.ValueGauge
+		m.ValueGauge = dataM.ValueGauge
 		m.ValueCounter += dataM.ValueCounter
 	}
 
