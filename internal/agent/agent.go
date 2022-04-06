@@ -3,6 +3,7 @@ package agent
 import (
 	"context"
 	"fmt"
+	"log"
 	"math/rand"
 	"net/http"
 	reflect "reflect"
@@ -69,6 +70,10 @@ func (A *Agent) sendMetrics(ctx context.Context) {
 	defer cancel()
 	for _, name := range *A.Settings.Metrics {
 		value, statType := GetMemStatByName(A.data.memstats, name)
+		if value == nil {
+			log.Println("metric not found")
+			continue
+		}
 		switch statType {
 		case reflect.Uint64:
 			A.sendRequest(ctx2, "gauge", name, value)
