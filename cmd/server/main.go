@@ -8,7 +8,6 @@ import (
 	"github.com/arzzra/go_practicum/internal/server/storage/local"
 	"log"
 	"net/http"
-	"os"
 	"os/signal"
 	"syscall"
 	"time"
@@ -16,6 +15,7 @@ import (
 
 const (
 	host            = "localhost"
+	port            = "8080"
 	shutdownTimeout = 4 * time.Second
 )
 
@@ -60,10 +60,6 @@ func main() {
 		syscall.SIGQUIT,
 	)
 	defer stop()
-	var port string = "8080"
-	if fromEnv := os.Getenv("PORT"); fromEnv != "" {
-		port = fromEnv
-	}
 	if err := StartServer(ctx, host, port); err != nil {
 		log.Fatalf("Server failed: %v", err)
 	}
