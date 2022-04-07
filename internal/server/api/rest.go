@@ -16,7 +16,7 @@ const templateHTML = `
 		<title>{{.Title}}</title>
 	</head>
 	<body>
-		{{range .Metrics}}<div>{{ .Name }}: {{ .StringValue }}</div>{{end}}
+		{{range .AllMetric}}<div>{{ .Name }}: {{ .GetValueString }}</div>{{end}}
 	</body>
 	</html>`
 
@@ -49,12 +49,11 @@ func (h *Handler) getMetric(w http.ResponseWriter, r *http.Request) {
 }
 
 type metricsForHTML struct {
-	Title   string
-	Metrics []metric.Metric
+	Title     string
+	AllMetric []metric.Metric
 }
 
 func (h *Handler) getAllMetrics(w http.ResponseWriter, r *http.Request) {
-
 	t, err := template.New("getAllMetric").Parse(templateHTML)
 	if err != nil {
 		errHTTP := http.StatusInternalServerError
@@ -68,10 +67,9 @@ func (h *Handler) getAllMetrics(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, err.Error(), errCode)
 		return
 	}
-
 	data := metricsForHTML{
-		Title:   "Metrics List",
-		Metrics: *m,
+		Title:     "All Metrics",
+		AllMetric: *m,
 	}
 	w.Header().Set("content-type", typeContent)
 	w.WriteHeader(http.StatusOK)

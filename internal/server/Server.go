@@ -2,14 +2,22 @@ package server
 
 import (
 	"errors"
-	"github.com/arzzra/go_practicum/internal/server/storage/local"
+	"github.com/arzzra/go_practicum/internal/server/storage"
 )
 
 type Server struct {
-	Storage *local.MetricStorage
+	Storage storage.MetricStorage
 }
 
-func MakeServer(storage *local.MetricStorage) (*Server, error) {
+//func (s *Server) GetFromStorage(metricType metric.MetricType) {
+//	s.Storage.
+//}
+//
+//func (s *Server) SaveToStorage(metricType metric.MetricType) {
+//	s.Storage.
+//}
+
+func MakeServer(storage storage.MetricStorage) (*Server, error) {
 	if storage == nil {
 		return nil, errors.New("storage is not initialized")
 	}
