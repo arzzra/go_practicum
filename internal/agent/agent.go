@@ -3,6 +3,7 @@ package agent
 import (
 	"context"
 	"fmt"
+	"log"
 	"math/rand"
 	"net/http"
 	reflect "reflect"
@@ -69,6 +70,10 @@ func (A *Agent) sendMetrics(ctx context.Context) {
 	defer cancel()
 	for _, name := range *A.Settings.Metrics {
 		value, statType := GetMemStatByName(A.data.memstats, name)
+		if value == nil {
+			log.Println("metric not found")
+			continue
+		}
 		switch statType {
 		case reflect.Uint64:
 			A.sendRequest(ctx2, "gauge", name, value)
@@ -82,12 +87,9 @@ func (A *Agent) sendMetrics(ctx context.Context) {
 }
 
 func (A *Agent) sendRequest(ctx context.Context, statType string, nameStat string, value interface{}) {
-	var url string
-	//x := reflect.TypeOf(value).Kind()
-	url = fmt.Sprintf("http://%s:%s/update/%s/%s/%v",
+	url := fmt.Sprintf("http://%s:%s/update/%s/%s/%v",
 		A.Settings.Host, A.Settings.Port,
 		statType, nameStat, reflect.ValueOf(value))
-	fmt.Println(url)
 	A.SyncWG.Add(1)
 	go func() {
 		defer A.SyncWG.Done()
